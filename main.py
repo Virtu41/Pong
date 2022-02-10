@@ -61,14 +61,14 @@ def message_display1(text):
     #declares the font and font size 
     smallText = pygame.font.Font("freesansbold.ttf", 15)
     TextSurf, TextRect = text_objects(text, smallText)
-    TextRect.center = ((215),(200))
+    TextRect.center = ((217),(200))
     gameDisplay.blit(TextSurf, TextRect)
     
 def message_display2(text):
     #declares the font and font size 
     smallText = pygame.font.Font("freesansbold.ttf", 15)
     TextSurf, TextRect = text_objects(text, smallText)
-    TextRect.center = ((265),(250))
+    TextRect.center = ((263),(250))
     gameDisplay.blit(TextSurf, TextRect)
     
 def message_display3(text):
@@ -110,24 +110,38 @@ def message_display7(text):
     TextSurf, TextRect = text_objects(text, smallText)
     TextRect.center = ((display_width/2),(display_height/3))
     gameDisplay.blit(TextSurf, TextRect)
+
+def message_display8(text):
+    #declares the font and font size 
+    smallText = pygame.font.Font("freesansbold.ttf", 40)
+    TextSurf, TextRect = text_objects(text, smallText)
+    TextRect.center = ((display_width/2),(display_height/4))
+    gameDisplay.blit(TextSurf, TextRect)
     
 def countdown():
-    number = 3
+    number = 5
     gameDisplay.fill(black)
 
     #numbers countdown from 1
-    for i in range(3):
-        message_display("GET READY")
+    for i in range(5):
+        message_display8("Game starting in")
         message_display1("Use the W , S keys to control paddle if you are Player 1.")
         message_display2("Use the UP , DOWN arrow keys to control paddle if you are player 2.")
         message_display5("Hit the ball with the paddle as it goes to your side.")
         message_display6("First to 10 points wins the game")
-        
+
         wasd = gameDisplay.blit(wasdinstructions,(375,350))       
+        pygame.display.update()
+        largeText = pygame.font.Font("freesansbold.ttf",40)
+        textSurf,textRect = text_objects(str(number),largeText)
+        textRect.center = ((540),(display_height/4))
+        gameDisplay.blit(textSurf,textRect)
         pygame.display.update()
         number -= 1
         time.sleep(1)
-        gameDisplay.fill(black)
+        gameDisplay.fill(black)        
+        #numbers countdown from 3        
+
  
     
 #button function   
@@ -292,13 +306,13 @@ def intro():
             #Moving the paddles when the use uses the arrow keys (player A) or "W/S" keys (player B) 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_w]:
-                paddleA.moveUp(8)
+                paddleA.moveUp(9)
             if keys[pygame.K_s]:
-                paddleA.moveDown(8)
+                paddleA.moveDown(9)
             if keys[pygame.K_UP]:
-                paddleB.moveUp(8)
+                paddleB.moveUp(9)
             if keys[pygame.K_DOWN]:
-                paddleB.moveDown(8)    
+                paddleB.moveDown(9)    
         
             # --- Game logic should go here
             all_sprites_list.update()
@@ -312,7 +326,7 @@ def intro():
                 paddleB.rect.y = 200
                 paddleA.rect.x = 20
                 paddleA.rect.y = 200                
-                time.sleep(1)
+                time.sleep(.5)
                 ball.velocity[1]
             if ball.rect.x<=0:
                 scoreB+=1
@@ -322,7 +336,7 @@ def intro():
                 paddleB.rect.y = 200
                 paddleA.rect.x = 20
                 paddleA.rect.y = 200                
-                time.sleep(1)                
+                time.sleep(.5)                
                 ball.velocity[1]
             if ball.rect.y>490:
                 ball.velocity[1] = -ball.velocity[1]
@@ -364,8 +378,8 @@ def intro():
             # --- Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
         
-            # --- Limits to 90 frames per second
-            clock.tick(90)
+            # --- Limits to 70 frames per second
+            clock.tick(100)
             
         #Once we have exited the main program loop we can stop the game engine:
         pygame.quit()

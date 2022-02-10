@@ -34,4 +34,4 @@ class Ball(pygame.sprite.Sprite):
         self.velocity[0] = -self.velocity[0]
         self.velocity[1] = randint(-8,8)
         
-clock.tick(90)
+clock.tick(60)
